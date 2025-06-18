@@ -3,7 +3,8 @@ import reactLogo from './assets/react.svg';
 import viteLogo from '/vite.svg';
 import './App.css';
 import Lectura_datos_lanbide from './Components/Lectura_datos_lanbide';
-import Tabla_cursos from './Components/Tabla_cursos';
+import TablaCursos from './Components/Tabla_cursos';
+import { DataGrid } from '@mui/x-data-grid';
 
 
 function App() {
@@ -32,7 +33,7 @@ function App() {
       <p className="read-the-docs">
         Click on the Vite and React logos to learn more
       </p>
-      <tabla_cursos />
+      <TablaCursos/>
     </>
   )
 }

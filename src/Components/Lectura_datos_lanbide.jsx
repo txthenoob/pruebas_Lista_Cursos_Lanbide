@@ -24,15 +24,9 @@ const Lectura_datos_lanbide = () => {
         
         return (
             <>
-            <button onClick={handle_datos_lanbide}>Fetch del Json</button>
-            
+                <button onClick={handle_datos_lanbide}>Fetch del Json</button>
             </>
         )
-    
-
-
-
-
 }
 
 export default Lectura_datos_lanbide;
