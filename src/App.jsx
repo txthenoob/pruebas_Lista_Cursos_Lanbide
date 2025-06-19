@@ -1,41 +1,25 @@
-import { useState } from 'react';
-import reactLogo from './assets/react.svg';
-import viteLogo from '/vite.svg';
-import './App.css';
+import React, { useEffect, useState } from 'react';
+import TablaCursos from './Components/TablaCursos';
 import Lectura_datos_lanbide from './Components/Lectura_datos_lanbide';
-import TablaCursos from './Components/Tabla_cursos';
-import { DataGrid } from '@mui/x-data-grid';
 
 
-function App() {
-  const [count, setCount] = useState(0)
+const App = () => {
+  const [cursos, setCursos] = useState([]);
+
+  useEffect(() => {
+    fetch('https://www.lanbide.euskadi.eus/lanbide-apps/servlet/cursoServlet?accion=getCursos&idioma=es')
+      .then(r => r.json())
+      .then(data => setCursos(data))
+      .catch(console.error);
+  }, []);
 
   return (
-    <>
-      <div>
-        <a href="https://vite.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1> 
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <Lectura_datos_lanbide  />
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-      <TablaCursos/>
-    </>
-  )
-}
+    <div>
+      <h1>Lanbide Courses List</h1>
+      <Lectura_datos_lanbide setData={setCursos} />
+      <TablaCursos data={cursos} />
+    </div>
+  );
+};
 
-export default App
+export default App;

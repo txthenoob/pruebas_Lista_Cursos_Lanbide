@@ -1,7 +1,7 @@
 import {useState} from "react";
 
-const Lectura_datos_lanbide = () => {
-    const [data, setData] = useState({});
+const Lectura_datos_lanbide = ({setData}) => {
+    //const [data, setData] = useState({});
 
     
     const handle_datos_lanbide = () => {
