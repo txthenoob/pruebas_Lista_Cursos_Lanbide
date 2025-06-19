@@ -1,12 +1,94 @@
-# React + Vite
+# PRUEBAS_LISTA_CURSOS_LANBIDE
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+React + Vite web application to explore official training courses from sources like IVAP and Lanbide. Includes a backend proxy using Express.js to bypass CORS limitations in production.
 
-Currently, two official plugins are available:
+---
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## 📦 Project Structure
 
-## Expanding the ESLint configuration
+```
+.
+├── frontend/         # React client built with Vite
+│   ├── Dockerfile
+│   ├── nginx.conf
+│   ├── package.json
+│   └── src/
+│       ├── components/
+│       └── ...
+│
+├── api/              # Express.js proxy backend for Lanbide
+│   ├── Dockerfile
+│   ├── package.json
+│   └── index.js
+│
+├── docker-compose.yml
+└── README.md
+```
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+---
+
+## 🚀 Quick Start (Development & Production)
+
+### 🔧 Requirements
+
+- Docker + Docker Compose installed
+
+### ▶️ Run
+
+```bash
+docker-compose up --build
+```
+
+- Frontend available at: **http://localhost**
+- Backend proxy available at: **http://localhost:3001/api/lanbide**
+
+---
+
+## 🌐 Backend API Proxy
+
+The backend exposes:
+
+```
+GET /api/lanbide
+```
+
+This acts as a proxy to:
+
+```
+https://www.lanbide.euskadi.eus/lanbide-apps/servlet/cursoServlet?accion=getCursos&idioma=es
+```
+
+This solves browser-side CORS issues by proxying through Express.js.
+
+---
+
+## ⚛️ React Components
+
+- `LecturaDatosLanbide.jsx`: Handles data loading from IVAP or other public sources
+- `TablaCursos.jsx`: Renders a dynamic table using `@tanstack/react-table`
+
+---
+
+## 🧱 Manual Build (Frontend only)
+
+```bash
+cd frontend
+npm install
+npm run build
+npm run preview
+```
+
+---
+
+## 🔮 Suggested Next Steps
+
+- Add server-side caching (e.g., Redis, in-memory)
+- Integrate additional public course sources (SEPE, Lanbide FO, etc.)
+- Add filters, search, and CSV export
+- Deploy via Railway, Render, Fly.io, or custom VPS with Docker
+
+---
+
+## 🛡 License
+
+MIT © 2025

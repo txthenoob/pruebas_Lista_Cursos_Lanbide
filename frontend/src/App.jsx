@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
-import TablaCursos from './Components/TablaCursos';
-import Lectura_datos_lanbide from './Components/Lectura_datos_lanbide';
+import TablaCursos from './components/TablaCursos';
+import Lectura_datos_lanbide from './components/LecturaDatosLanbide';
 
 
 const App = () => {
