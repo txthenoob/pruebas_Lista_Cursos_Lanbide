@@ -6,20 +6,23 @@ import {
 } from '@tanstack/react-table';
 
 const TablaCursos = ({ data }) => {
-  const columns = useMemo(() => [
-    {
-      accessorKey: 'nombre',
-      header: 'Curso',
-    },
-    {
-      accessorKey: 'centro',
-      header: 'Centro',
-    },
-    {
-      accessorKey: 'fecha_inicio',
-      header: 'Fecha de inicio',
-    },
-  ], []);
+
+  const columns = useMemo(() => {
+    if (!data || data.length === 0) return [];
+
+    const keys = Object.keys(data[0]);
+
+    return keys.map(key => ({
+      accessorKey: key,
+      header: key.charAt(0).toUpperCase() + key.slice(1), // Capitaliza
+      cell: info => {
+        const value = info.getValue();
+        if (Array.isArray(value)) return value.join(', ');
+        if (typeof value === 'object' && value !== null) return JSON.stringify(value);
+        return value ?? '';
+      }
+    }));
+  }, [data]);
 
   const table = useReactTable({
     data,
