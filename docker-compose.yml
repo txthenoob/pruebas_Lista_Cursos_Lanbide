@@ -11,6 +11,8 @@ services:
     depends_on:
       - api
     restart: unless-stopped
+    volumes:
+      - ./frontend/src:/app
 
   api:
     build:
